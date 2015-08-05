@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "summary": "use the HTML5 WebSockets API",
+    "repository": "https ://github.com/vilterp/elm-websockets.git",
+    "license": "BSD3",
+    "source-directories": [
+        "."
+    ],
+    "dependencies": {
+        "elm-lang/core": "2.0.0 <= v < 3.0.0"
+    },
+    "exposed-modules": [
+        "WebSocket"
+    ],
+    "native-modules": true,
+    "elm-version": "0.15.0 <= v < 0.16.0"
+}
