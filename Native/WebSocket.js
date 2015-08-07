@@ -24,7 +24,7 @@ Elm.Native.WebSocket.make = function(localRuntime) {
                 }));
             });
             socket.addEventListener("close", function(evt) {
-                address._0({ctor: "Close"})
+                Task.perform(address._0({ctor: "Close"}));
             });
             socket.addEventListener("open", function(evt) {
                 callback(Task.succeed(socket));
