@@ -23,11 +23,20 @@ type SocketEvent
   | Close
 
 
+type InvalidStateError
+  = SocketNotOpenError
+
+
 create : URL -> Signal.Address SocketEvent -> Task.Task x WebSocket
 create =
   Native.WebSocket.create
 
 
-send : Message -> WebSocket -> Task.Task x ()
+send : WebSocket -> Message -> Task.Task InvalidStateError ()
 send =
   Native.WebSocket.send
+
+
+close : WebSocket -> Task.Task x ()
+close =
+  Native.WebSocket.close

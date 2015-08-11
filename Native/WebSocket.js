@@ -32,10 +32,22 @@ Elm.Native.WebSocket.make = function(localRuntime) {
         });
     }
 
-    function send(message, socket)
+    function send(socket, message)
     {
         return Task.asyncFunction(function(callback) {
-            socket.send(message);
+            if(socket.readyState == WebSocket.OPEN) {
+                socket.send(message);
+                callback(Task.succeed(Utils.Tuple0));
+            } else {
+                callback(Task.fail({ctor: 'SocketNotOpenError'}))
+            }
+        });
+    }
+
+    function close(socket)
+    {
+        return Task.asyncFunction(function(callback) {
+            socket.close();
             callback(Task.succeed(Utils.Tuple0));
         });
     }
@@ -43,6 +55,7 @@ Elm.Native.WebSocket.make = function(localRuntime) {
     localRuntime.Native.WebSocket.values = {
         create: F2(create),
         send: F2(send),
+        close: close
     };
     return localRuntime.Native.WebSocket.values;
 };
